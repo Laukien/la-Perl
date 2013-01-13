@@ -112,6 +112,7 @@ sub readString(*) {
 	while(<FH>) {
 		$data .= $_;
 	}
+	close(FH);
 
 	return $data
 }	# ----------  end of subroutine readString  ----------
