@@ -95,6 +95,26 @@ sub getPathSeparator {
 
 
 #===  FUNCTION  ================================================================
+#         NAME:  exists
+#      PURPOSE:  checks if a file exists
+#   PARAMETERS:  filename
+#      RETURNS:  '1' if the file exists; otherwise '0'
+#  DESCRIPTION:  ????
+#       THROWS:  no exceptions
+#     COMMENTS:  none
+#     SEE ALSO:  n/a
+#===============================================================================
+sub exists(*) {
+	my $file = shift;
+
+	open(FH, "<$file") || return 0;
+	close(FH);
+
+	return 1;
+}	# ----------  end of subroutine exists  ----------
+
+
+#===  FUNCTION  ================================================================
 #         NAME:  readString
 #      PURPOSE:  reads the file into a string
 #   PARAMETERS:  filename
