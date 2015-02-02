@@ -109,7 +109,7 @@ sub correctPath {
 
 # translate
 	$_ = $param;                                # set variable
-	if ( isWindows ) {                          # check os
+    if (isWindows()) {                          # check os
 		$_ =~ tr!/!\\!;	
 	} else {
 		$_ =~ tr!\\!/!;
