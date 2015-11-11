@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 #######################    Simplified BSD License    ########################
-# Copyright (c) 2010, 2011, 2012
+# Copyright (c) 2010, 2011, 2012, 2013, 2014, 2015
 # Stephan Laukien (All rights reserved)
 #
 # Redistribution and use in source and binary forms, with or without 
@@ -30,7 +30,7 @@
 #
 #         FILE:  Oracle.pm
 #
-#        USAGE:  use Laukien::Database::Oracle;
+#        USAGE:  use Laukien::Oracle;
 #
 #  DESCRIPTION:  common operations at and for the Oracle-Database
 #
@@ -45,14 +45,52 @@
 #     REVISION:  0.1
 #===============================================================================
 
-package Laukien::Database::Oracle;
-@ISA = qw(Laukien::Database::Common);
+package Laukien::Oracle;
 
 use strict;
 use warnings;
 #no warnings 'redefine';
 
-use Laukien::Database::Common;
+use Laukien::DateTime;
+
+#
+#===  FUNCTION  ================================================================
+#         NAME:  new
+#      PURPOSE:  constructor
+#   PARAMETERS:  ????
+#      RETURNS:  ????
+#  DESCRIPTION:  ????
+#       THROWS:  no exceptions
+#     COMMENTS:  none
+#     SEE ALSO:  n/a
+#===============================================================================
+sub new {
+	my $class = shift;
+	my $self = {};
+
+# init timestamp
+	$self->{timestamp} = Laukien::DateTime::getTimestamp();
+
+	return bless($self, $class);
+}	# ----------  end of subroutine new  ----------
+
+
+#===  FUNCTION  ================================================================
+#         NAME:  getTimestamp
+#      PURPOSE:  returns the current 'unique' timestamp (once calculated)
+#   PARAMETERS:  ????
+#      RETURNS:  ????
+#  DESCRIPTION:  ????
+#       THROWS:  no exceptions
+#     COMMENTS:  none
+#     SEE ALSO:  n/a
+#===============================================================================
+sub getTimestamp(*) {
+	my $self = shift;
+
+	return $self->{timestamp};
+}	# ----------  end of subroutine getTimestamp  ----------
+
 
 #===  FUNCTION  ================================================================
 #         NAME:  setHome
@@ -268,3 +306,4 @@ sub dropDirectory(**) {
 	return $self->runCommand($cmd);
 }	# ----------  end of subroutine addDirectory  ----------
 
+1;
