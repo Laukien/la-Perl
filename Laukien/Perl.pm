@@ -53,8 +53,8 @@ use warnings;
 #use ExtUtils::Installed;
 #use Module::CoreList;
 
-use Laukien::OS;
 use Laukien::String;
+use Laukien::System;
 
 
 #===  FUNCTION  ================================================================
@@ -168,7 +168,7 @@ sub getModuleList {
 	my @list=();
 	foreach my $dir (@INC) {
 		next unless (-e $dir);                  # only if the directory exists
-		@list=(@list, Laukien::OS::getDirectory($dir, '.pm$', 1));
+		@list=(@list, Laukien::System::getDirectory($dir, '.pm$', 1));
 	}
 	return @list;
 }	# ----------  end of subroutine getModuleList  ----------
@@ -193,7 +193,7 @@ sub checkModule {
 	}
 
 # convert name to path
-	$name = Laukien::String::replace($name, '::', Laukien::OS::getSeparator());
+	$name = Laukien::String::replace($name, '::', Laukien::System::getSeparator());
 	$name .= '.pm';
 
 # get list of all modules

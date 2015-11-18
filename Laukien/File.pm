@@ -53,8 +53,8 @@ use warnings;
 use File::Spec;
 
 use Laukien::DateTime;
-use Laukien::OS;
 use Laukien::String;
+use Laukien::System;
 
 #===  FUNCTION  ================================================================
 #         NAME:  getSeparator
@@ -67,7 +67,7 @@ use Laukien::String;
 #     SEE ALSO:  n/a
 #===============================================================================
 sub getSeparator {
-	if (Laukien::OS::isWindows()) {
+	if (Laukien::System::isWindows()) {
 		return "\\";
 	} else {
 		return "/";
@@ -86,7 +86,7 @@ sub getSeparator {
 #     SEE ALSO:  n/a
 #===============================================================================
 sub getPathSeparator {
-	if (Laukien::OS::isWindows()) {
+	if (Laukien::System::isWindows()) {
 		return ";";
 	} else {
 		return ":";

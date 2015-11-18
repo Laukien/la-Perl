@@ -52,8 +52,8 @@ use warnings;
 #no warnings 'redefine';
 
 use Laukien::DateTime;
+use Laukien::System;
 
-#
 #===  FUNCTION  ================================================================
 #         NAME:  new
 #      PURPOSE:  constructor
@@ -218,7 +218,7 @@ sub runScript(**) {
 	$cmd .= 'bin';
 	$cmd .= Laukien::File::getSeparator();
 	$cmd .= 'sqlplus';
-	$cmd .= '.exe' if (Laukien::OS::isWindows());
+	$cmd .= '.exe' if (Laukien::System::isWindows());
 
 # user
 	$cmd .= ' ';

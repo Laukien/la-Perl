@@ -28,9 +28,9 @@
 
 #===============================================================================
 #
-#         FILE:  OS.pm
+#         FILE:  System.pm
 #
-#        USAGE:  use Laukien::OS;
+#        USAGE:  use Laukien::System;
 #
 #  DESCRIPTION:  basic methods which are in contact with the operating system
 #
@@ -45,7 +45,7 @@
 #     REVISION:  0.4
 #===============================================================================
 
-package Laukien::OS;
+package Laukien::System;
 
 use strict;
 use warnings;
@@ -158,7 +158,7 @@ sub getDirectory {
 
 # check directory
 	unless (defined($directory)) {
-		die "OS.getDirectory: Directory not defined.";
+		die "System.getDirectory: Directory not defined.";
 	}
 
 # check recursive
@@ -172,7 +172,7 @@ sub getDirectory {
 	}
 
 # read directory
-	opendir(DIR, $directory) || die "OS.getDirectory: Unable to read directory (" . $directory . ").";
+	opendir(DIR, $directory) || die "System.getDirectory: Unable to read directory (" . $directory . ").";
 	my @items=readdir(DIR);
 	closedir(DIR);
 
@@ -254,7 +254,7 @@ sub slashToDot {
 	my $string = shift;
 
 	unless (defined($string)) {
-		die "OS.slashToDot: Wrong parameter-set.";
+		die "System.slashToDot: Wrong parameter-set.";
 	}
 
 	$string =~ tr/\//./;
@@ -278,7 +278,7 @@ sub dotToSlash {
 	my $string = shift;
 
 	unless (defined($string)) {
-		die "OS.dotToSlash: Wrong parameter-set.";
+		die "System.dotToSlash: Wrong parameter-set.";
 	}
 
 	if (isWindows()) {
@@ -306,7 +306,7 @@ sub getExtension {
 	my $file =shift;
 
 	unless (defined($file)) {
-		die "OS.getExtension: Wrong parameter-set.";
+		die "System.getExtension: Wrong parameter-set.";
 	}
 
 # get the position of the last dot-separator
@@ -337,7 +337,7 @@ sub getUser {
 	} elsif (isUnix()) {
 		return $ENV{'USER'};
 	} else {
-		die('Unknown OS-environment.');
+		die('Unknown System-environment.');
 	}
 }	# ----------  end of subroutine getUser  ----------
 

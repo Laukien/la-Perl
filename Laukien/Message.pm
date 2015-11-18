@@ -199,14 +199,14 @@ sub info {
 sub error {
 	my $key = shift;
 	my $value = shift;
-	my $code =shift;
+	my $code = shift;
 
 	unless (defined($key)) {
 		die "Message.error: Wrong parameter-set (key).";
 	}
 
 # check if 'value' is a number (exit code)
-	if (Laukien::String::isNumber($value)) {
+	if (defined($value) && Laukien::String::isNumber($value)) {
 		$code = $value;
 		$value = undef;
 	} else {
