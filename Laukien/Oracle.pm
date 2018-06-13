@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 #######################    Simplified BSD License    ########################
-# Copyright (c) 2010, 2011, 2012, 2013, 2014, 2015
+# Copyright (c) 2010-2018
 # Stephan Laukien (All rights reserved)
 #
 # Redistribution and use in source and binary forms, with or without 
@@ -52,6 +52,7 @@ use warnings;
 #no warnings 'redefine';
 
 use Laukien::DateTime;
+use Laukien::File;
 use Laukien::System;
 
 #===  FUNCTION  ================================================================
@@ -212,6 +213,9 @@ sub runScript(**) {
 # check parameters
 	return 1 if ($self->checkParameter());
 
+# set ORACLE_HOME
+    $ENV{'ORACLE_HOME'} = $self->{home};
+
 # build sqlplus-command (ORACLE_HOME/bin/sqlplus[.exe])
 	my $cmd = $self->{home};
 	$cmd .= Laukien::File::getSeparator();
@@ -250,19 +254,24 @@ sub runCommand(**) {
 	my $self = shift;
 	my $command = shift;
 
-	my $file = Laukien::File::getTempFile();    # make temp-file
+	my $sql = Laukien::File::getTempFile();    # make temp-file
+	my $out = Laukien::File::getTempFile();    # make temp-file
 	
 # write temp-file
-	open(FH, '>', $file) || return 1;
+	open(FH, '>', $sql) || return 1;
+	print FH "SPOOL $out\n";
     print FH $command . "\n";                   # command
-    print FH "exit;\n";                         # exit script
+    print FH "SPOOL OFF\n";
+    print FH "EXIT\n";                          # exit script
 	close(FH);
 
-    my $status = $self->runScript($file);       # run script
+    my $status = $self->runScript($sql);        # run script
 
-	unlink($file);                              # delete temp-file
+    my $res = Laukien::File::readString($out);
+	unlink($out);                               # delete temp-file
+	unlink($sql);                               # delete temp-file
 
-	return $status;
+	return $res;
 }	# ----------  end of subroutine runCommand  ----------
 
 

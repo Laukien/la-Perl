@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 #######################    Simplified BSD License    ########################
-# Copyright (c) 2010, 2011, 2012, 2013, 2014, 2015
+# Copyright (c) 2010-2018
 # Stephan Laukien (All rights reserved)
 #
 # Redistribution and use in source and binary forms, with or without 
@@ -40,9 +40,9 @@
 #        NOTES:  ---
 #       AUTHOR:  Stephan Laukien
 #      COMPANY:  
-#      VERSION:  1.0
+#      VERSION:  1.1
 #      CREATED:  14.04.2011 12:23:26
-#     REVISION:  0.3
+#     REVISION:  0.1
 #===============================================================================
 
 package Laukien::DateTime;
@@ -147,6 +147,31 @@ sub getTime {
 }	# ----------  end of subroutine getTime  ----------
 
 
+=pod
+
+=head1 NAME
+
+Laukien::DateTime
+
+=head1 VERSION
+
+version 1.1
+
+=head1 SYNOPSIS
+
+simple methods which access date und time
+
+=head1 AUTHOR
+
+Stephan Laukien <software@laukien.com>
+
+Please report bugs L<here|https://github.com/Laukien/la-Perl/>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011-2017 by Stephan Laukien.
+
+=cut
 
 1;
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 #######################    Simplified BSD License    ########################
-# Copyright (c) 2010, 2011, 2012, 2013, 2014, 2015
+# Copyright (c) 2010-2018
 # Stephan Laukien (All rights reserved)
 #
 # Redistribution and use in source and binary forms, with or without 
@@ -40,9 +40,9 @@
 #        NOTES:  ---
 #       AUTHOR:  Stephan Laukien
 #      COMPANY:  
-#      VERSION:  1.0
+#      VERSION:  1.1
 #      CREATED:  01.01.2011 01:20:11
-#     REVISION:  0.4
+#     REVISION:  0.1
 #===============================================================================
 
 package Laukien::Message;
@@ -81,8 +81,6 @@ sub isDebug {
 		$debug = $ENV{'debug'};
 	} elsif (defined($ENV{'LAUKIEN_DEBUG'})) {
 		$debug = $ENV{'LAUKIEN_DEBUG'};
-	} elsif (defined($ENV{'ADMEN_DEBUG'})) {
-		$debug = $ENV{'ADMEN_DEBUG'};
 	} else {
 		$debug = 'f';
 	}
@@ -132,99 +130,77 @@ sub setDebug {
 #===  FUNCTION  ================================================================
 #         NAME:  debug
 #      PURPOSE:  writes out debug-messages if Admen is in debug-mode
-#   PARAMETERS:  the 'key' and (optional) it's 'value'
+#   PARAMETERS:  the debug-message
 #      RETURNS:  none
 #  DESCRIPTION:  ????
 #       THROWS:  no exceptions
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub debug {
-	my $key = shift;
+sub debug(*) {
 	my $value = shift;
 
 # break if is no debug-mode
 	return unless (isDebug());
 
-	unless (defined($key)) {
-		die "Message.debug: Wrong parameter-set (key).";
-	}
-
-	if (defined($value)) {                      # key-value-pair
-		$key = Laukien::String::uppercase($key); # convert key
-		print $key . ": " . $value . "\n";      # print out key-value-pair
-	} else {                                    # message only
-		print $key . "\n";                      # print out message
-	}
+	print "DEBUG: " . $value . "\n";        # print out message
 }	# ----------  end of subroutine debug  ----------
 
 
 #===  FUNCTION  ================================================================
 #         NAME:  info
 #      PURPOSE:  prints out the given message.
-#   PARAMETERS:  the 'key' and (optional) it's 'value'
+#   PARAMETERS:  the info-message
 #      RETURNS:  ????
 #  DESCRIPTION:  ????
 #       THROWS:  no exceptions
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub info {
-	my $key = shift;
+sub info(*) {
 	my $value = shift;
 
-	unless (defined($key)) {
-		die "Message.info: Wrong parameter-set (key).";
-	}
+	print "INFO:  " . $value . "\n";        # print out message
+}	# ----------  end of subroutine info  ----------
 
-	if (defined($value)) {                      # key-value-pair
-		$key = Laukien::String::uppercase($key); # convert key
-		print $key . ": " . $value . "\n";      # print out key-value-pair
-	} else {                                    # message only
-		print $key . "\n";                      # print out message
-	}
+
+#===  FUNCTION  ================================================================
+#         NAME:  warn
+#      PURPOSE:  prints out the given message.
+#   PARAMETERS:  the warn-message
+#      RETURNS:  ????
+#  DESCRIPTION:  ????
+#       THROWS:  no exceptions
+#     COMMENTS:  none
+#     SEE ALSO:  n/a
+#===============================================================================
+sub warn(*) {
+	my $value = shift;
+
+	print "WARN:  " . $value . "\n";        # print out message
 }	# ----------  end of subroutine info  ----------
 
 
 #===  FUNCTION  ================================================================
 #         NAME:  error
 #      PURPOSE:  prints out the given error-message and exits the program
-#   PARAMETERS:  the 'key' and it's 'value'; the 'code' is the OS-exit-code
+#   PARAMETERS:  the error-message; the 'code' is the OS-exit-code
 #      RETURNS:  ????
 #  DESCRIPTION:  ????
 #       THROWS:  no exceptions
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub error {
-	my $key = shift;
+sub error(**) {
 	my $value = shift;
 	my $code = shift;
+	
+	die ("Message.info: invalid exit-code\n") unless Laukien::String::isNumber($code);
+	
+	print "ERROR: " . $value . "\n";            # print out message
 
-	unless (defined($key)) {
-		die "Message.error: Wrong parameter-set (key).";
-	}
-
-# check if 'value' is a number (exit code)
-	if (defined($value) && Laukien::String::isNumber($value)) {
-		$code = $value;
-		$value = undef;
-	} else {
-		unless (defined($code)) {
-			$code = 1;
-		}
-	}
-
-	if (defined($value)) {                      # key-value-pair
-		$key = Laukien::String::uppercase($key); # convert key
-		print $key . ": " . $value . "\n";      # print out key-value-pair
-	} else {                                    # message only
-		print $key . "\n";                      # print out message
-	}
-
- 	exit $code                                  # exit the program
+ 	exit $code;                                 # exit the program
 }	# ----------  end of subroutine error  ----------
 
 
 1;
-

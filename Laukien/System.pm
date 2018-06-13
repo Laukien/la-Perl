@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 #######################    Simplified BSD License    ########################
-# Copyright (c) 2010, 2011, 2012, 2013, 2014, 2015
+# Copyright (c) 2010-2018
 # Stephan Laukien (All rights reserved)
 #
 # Redistribution and use in source and binary forms, with or without 
@@ -81,11 +81,11 @@ sub isWindows {
 #     SEE ALSO:  n/a
 #===============================================================================
 sub isUnix {
-	if ( defined($ENV{'comspec'}) ) {
-		return 0;
-	} else {
-		return 1;
-	}
+	if (-d "/etc") {
+        return 1;
+    } else {
+        return 0;
+    }
 }	# ----------  end of subroutine isUnix  ----------
 
 #===  FUNCTION  ================================================================

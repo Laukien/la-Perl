@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 #######################    Simplified BSD License    ########################
-# Copyright (c) 2010, 2011, 2012, 2013, 2014, 2015
+# Copyright (c) 2010-2018
 # Stephan Laukien (All rights reserved)
 #
 # Redistribution and use in source and binary forms, with or without 
@@ -42,7 +42,7 @@
 #      COMPANY:  
 #      VERSION:  1.0
 #      CREATED:  01.01.2011 01:20:11
-#     REVISION:  0.4
+#     REVISION:  0.5
 #===============================================================================
 
 package Laukien::String;
@@ -61,7 +61,7 @@ use warnings;
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub trim {
+sub trim(*) {
 	my $string=shift;
 
 # check parameter
@@ -87,7 +87,7 @@ sub trim {
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub ltrim {
+sub ltrim(*) {
 	my $string=shift;
 
 # check parameter
@@ -112,7 +112,7 @@ sub ltrim {
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub rtrim {
+sub rtrim(*) {
 	my $string=shift;
 
 # check parameter
@@ -136,7 +136,7 @@ sub rtrim {
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub listToArray {
+sub listToArray(*) {
 # set parameter
 	my $string=shift;
 	my @array;
@@ -164,7 +164,7 @@ sub listToArray {
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub uppercase {
+sub uppercase(*) {
 	my $string = shift;
 
 	unless (defined($string)) {
@@ -187,7 +187,7 @@ sub uppercase {
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub lowercase {
+sub lowercase(*) {
 	my $string = shift;
 
 	unless (defined($string)) {
@@ -210,7 +210,7 @@ sub lowercase {
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub isNumber {
+sub isNumber(*) {
 	my $string = shift;
 	
 	unless (defined($string)) {
@@ -236,7 +236,7 @@ sub isNumber {
 #     COMMENTS:  none
 #     SEE ALSO:  n/a
 #===============================================================================
-sub replace {
+sub replace(***) {
 	my $str = shift;
 	my $old = shift;
 	my $new = shift;
@@ -283,7 +283,6 @@ sub random(*) {
 
 	return $string;
 }	# ----------  end of subroutine random  ----------
-
 
 
 1;
